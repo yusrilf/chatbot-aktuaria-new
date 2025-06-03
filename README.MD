@@ -1,6 +1,3 @@
-Berikut adalah versi README.md Anda yang sudah saya rapikan agar lebih rapi, mudah dibaca, dan konsisten untuk diunggah ke GitHub:
-
-````markdown
 # Actuarial Chatbot - Internal Knowledge Assistant
 
 AI-powered chatbot untuk tim aktuaria internal dengan kemampuan pemrosesan dokumen markdown dan question-answering berbasis GPT-4o.
@@ -153,7 +150,3 @@ Cek file `app.log` untuk debugging.
 
 Internal use only - PT Asuransi Indonesia
 
-```
-
-Kalau ada tambahan atau style lain yang kamu mau, bilang aja ya!
-```
