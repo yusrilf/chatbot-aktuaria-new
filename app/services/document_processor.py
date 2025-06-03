@@ -28,7 +28,7 @@ class DocumentProcessor:
             separators=["\n\n", "\n", " ", ""]
         )
     
-    def process_markdown_file(self, file_path: str) -> List[Document]:
+    def process_markdown_file(self, file_path: str, session_id: str) -> List[Document]:
         """Process a single markdown file into documents"""
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
@@ -49,7 +49,7 @@ class DocumentProcessor:
                     'source': file_path,
                     'filename': filename,
                     'doc_type': doc_type,
-                    'chunk_id': i,
+                    'session_id': session_id  # BARU: Simpan session_id
                 }
                 
                 # Add header context to metadata

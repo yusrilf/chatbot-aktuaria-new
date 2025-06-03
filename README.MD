@@ -67,7 +67,7 @@ python3 -m app.app
 | Endpoint                | Method | Deskripsi                                            |
 | ----------------------- | ------ | ---------------------------------------------------- |
 | `/health`               | GET    | Health check                                         |
-| `/input-docs`           | POST   | Upload dokumen (.md)                                 |
+| `/input-docs`           | POST   | Upload dokumen (.md) (input param: `session_id`)     |
 | `/ask`                  | POST   | Ajukan pertanyaan                                    |
 | `/conversation/history` | GET    | Ambil riwayat percakapan (query param: `session_id`) |
 | `/conversation/clear`   | POST   | Bersihkan memory percakapan                          |
@@ -86,6 +86,9 @@ curl -X POST http://localhost:5001/input-docs \
   -F "files=@sample_docs/panduan_aktuaria.md" \
   -F "files=@sample_docs/laporan_keuangan.md" \
   -F "files=@sample_docs/rumus_aktuaria.md"
+  -d '{
+    "session_id": "test_session"
+  }'
 ```
 
 ### Ask Questions
@@ -148,5 +151,5 @@ Cek file `app.log` untuk debugging.
 
 ## License
 
-Internal use only - PT Asuransi Indonesia
+Internal use only - PT Datapolis Indonesia
 

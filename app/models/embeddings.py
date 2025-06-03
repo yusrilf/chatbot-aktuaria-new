@@ -52,6 +52,10 @@ class VectorStoreManager:
                 logger.warning("No documents to add")
                 return False
             
+            # Log metadata dari setiap dokumen untuk debugging
+            for i, doc in enumerate(documents):
+                logger.info(f"Document {i} metadata: {doc.metadata}")
+        
             # Add documents to vector store
             self.vectorstore.add_documents(documents)
             logger.info(f"Added {len(documents)} documents to vector store")
@@ -61,13 +65,14 @@ class VectorStoreManager:
             logger.error(f"Error adding documents to vector store: {str(e)}")
             return False
     
-    def similarity_search(self, query: str, k: int = None) -> List[Document]:
+    def similarity_search(self, query: str, session_id: str, k: int = None) -> List[Document]:
         """Search for similar documents"""
         try:
             k = k or config.TOP_K_RESULTS
+            
             results = self.vectorstore.similarity_search(
                 query=query,
-                k=k
+                k=k,
             )
             logger.info(f"Found {len(results)} similar documents for query")
             return results
@@ -76,26 +81,81 @@ class VectorStoreManager:
             logger.error(f"Error searching documents: {str(e)}")
             return []
     
-    def similarity_search_with_score(self, query: str, k: int = None) -> List[tuple]:
+    def similarity_search_with_score(self, query: str, session_id: str, k: int = None) -> List[tuple]:
         """Search for similar documents with similarity scores"""
         try:
             k = k or config.TOP_K_RESULTS
-            results = self.vectorstore.similarity_search_with_score(
+            
+            # DIAGNOSA: Test apakah filter ChromaDB bekerja
+            #logger.info(f"Testing ChromaDB filter for session_id: '{session_id}'")
+            
+            # Test 1: Dengan filter
+            metadata_filter = {"session_id": session_id}
+            results_filtered = self.vectorstore.similarity_search_with_score(
                 query=query,
-                k=k
+                k=k,
+                filter=metadata_filter
             )
             
-            # Filter by similarity threshold
+            # Test 2: Tanpa filter (untuk comparison)
+            results_no_filter = self.vectorstore.similarity_search_with_score(
+                query=query,
+                k=k * 3  # Ambil lebih banyak untuk manual filter
+            )
+            
+            #logger.info(f"Results with ChromaDB filter: {len(results_filtered)}")
+            #logger.info(f"Results without filter: {len(results_no_filter)}")
+            
+            # Cek apakah filter benar-benar bekerja
+            filter_working = True
+            if len(results_filtered) > 0:
+                # Cek apakah ada hasil yang tidak sesuai session_id
+                for doc, score in results_filtered:
+                    if doc.metadata.get('session_id') != session_id:
+                        filter_working = False
+                        logger.warning("ChromaDB filter NOT working - found non-matching session_id")
+                        break
+            
+            # Jika filter tidak bekerja, gunakan manual filtering
+            if not filter_working or len(results_filtered) == 0:
+                logger.info("Using manual filtering approach")
+                
+                # Manual filter dari hasil tanpa filter
+                manual_filtered = [
+                    (doc, score) for doc, score in results_no_filter
+                    if doc.metadata.get('session_id') == session_id
+                ]
+                
+                # Sort by score dan ambil top k
+                manual_filtered.sort(key=lambda x: x[1])  # Sort by score (ascending = better)
+                results = manual_filtered[:k]
+                
+                logger.info(f"Manual filtering found {len(results)} matching documents")
+            else:
+                logger.info("ChromaDB filter working correctly")
+                results = results_filtered
+            
+            # Debug log hasil final
+            logger.info(f"Final results count: {len(results)}")
+            for i, (doc, score) in enumerate(results):
+                doc_session_id = doc.metadata.get('session_id')
+                filename = doc.metadata.get('filename', 'N/A')
+                logger.info(f"Final Result {i}: filename={filename}, session_id='{doc_session_id}', score={score}")
+            
+            # Apply similarity threshold
             filtered_results = [
-                (doc, score) for doc, score in results 
+                (doc, score) for doc, score in results
                 if score >= config.SIMILARITY_THRESHOLD
             ]
             
-            logger.info(f"Found {len(filtered_results)} relevant documents above threshold")
+            logger.info(f"Found {len(filtered_results)} documents above threshold ({config.SIMILARITY_THRESHOLD})")
+        
+            #logger.info(filtered_results)
             return filtered_results
             
         except Exception as e:
             logger.error(f"Error searching documents with score: {str(e)}")
+            logger.error(f"Exception type: {type(e).__name__}")
             return []
     
     def get_collection_info(self) -> dict:

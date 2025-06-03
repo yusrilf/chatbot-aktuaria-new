@@ -75,6 +75,8 @@ def input_documents():
                 message="No files provided"
             )), 400
         
+        session_id = request.form.get('session_id')  # Dapatkan session_id dari form
+
         files = request.files.getlist('files')
         if not validate_files(files):
             return jsonify(create_response(
@@ -97,7 +99,7 @@ def input_documents():
                 
                 # Validate and process file
                 if document_processor.validate_file(temp_path):
-                    documents = document_processor.process_markdown_file(temp_path)
+                    documents = document_processor.process_markdown_file(temp_path, session_id)  # Kirim session_id
                     
                     if documents:
                         # Add to vector store
@@ -108,6 +110,7 @@ def input_documents():
                                 'filename': filename,
                                 'chunks': len(documents),
                                 'size': get_file_size(temp_path),
+                                'session_id' : session_id,
                                 'status': 'success'
                             })
                             total_chunks += len(documents)
@@ -154,7 +157,7 @@ def ask_question():
     """Ask a question to the chatbot"""
     try:
         data = request.get_json()
-        
+
         if not data or 'question' not in data:
             return jsonify(create_response(
                 success=False,
@@ -171,6 +174,7 @@ def ask_question():
             )), 400
         
         # Process question
+        # DEBUG: Log input
         result = chat_service.ask_question(question, session_id)
         
         return jsonify(create_response(
