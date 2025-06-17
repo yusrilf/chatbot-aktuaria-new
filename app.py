@@ -134,7 +134,7 @@ with st.sidebar:
     # URL API
     api_url = st.text_input(
         "URL API:",
-        value="http://localhost:5001/ask",
+        value="https://chatbot-app-service.azurewebsites.net/ask",
         help="Masukkan URL endpoint API"
     )
     

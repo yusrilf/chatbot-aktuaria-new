@@ -32,3 +32,4 @@ class Config:
     LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 
 config = Config()
+

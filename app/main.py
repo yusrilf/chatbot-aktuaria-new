@@ -11,6 +11,10 @@ from app.models.embeddings import VectorStoreManager
 from app.utils.helpers import setup_logging, validate_files, validate_openai_key, create_response, get_file_size
 from flask_cors import CORS
 
+# __import__('pysqlite3')
+# import sys
+# sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 # Setup logging
 setup_logging(config.LOG_LEVEL)
 logger = logging.getLogger(__name__)
@@ -152,6 +156,49 @@ def input_documents():
             data={'error': str(e)}
         )), 500
 
+@app.route('/askproject', methods=['POST'])
+def ask_project():
+    """Ask a question to the chatbot"""
+    try:
+        data = request.get_json()
+
+        if not data or 'question' not in data:
+            return jsonify(create_response(
+                success=False,
+                message="Question is required"
+            )), 400
+        
+        question = data['question'].strip()
+        session_id = data.get('session_id', 'default')
+        
+        if not question:
+            return jsonify(create_response(
+                success=False,
+                message="Question cannot be empty"
+            )), 400
+        
+        # Process question
+        # DEBUG: Log input
+        result = chat_service.ask_project(question, session_id)
+        
+        return jsonify(create_response(
+            success=True,
+            message="Question processed successfully",
+            data=result
+        ))
+        
+        
+    except Exception as e:
+        logger.error(f"Error processing question: {str(e)}")
+        logger.error(traceback.format_exc())
+        return jsonify(create_response(
+            success=False,
+            message="Error processing question",
+            data={'error': str(e)}
+        )), 500
+    
+
+# main.py
 @app.route('/ask', methods=['POST'])
 def ask_question():
     """Ask a question to the chatbot"""
@@ -174,7 +221,7 @@ def ask_question():
             )), 400
         
         # Process question
-        # DEBUG: Log input
+        logger.info(f"Processing question for session {session_id}: {question[:100]}...")
         result = chat_service.ask_question(question, session_id)
         
         return jsonify(create_response(

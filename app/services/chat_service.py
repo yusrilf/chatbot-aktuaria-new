@@ -1,6 +1,7 @@
 from typing import List, Dict, Any, Optional
 from langchain_openai import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
+import traceback
 from langchain.chains import ConversationalRetrievalChain, LLMChain
 from langchain.prompts import PromptTemplate
 from langchain.schema import Document
@@ -28,9 +29,9 @@ class ActuarialChatService:
         )
         
         self.qa_chain = None
-        self.external_qa_chain = None  # BARU: Chain untuk pertanyaan luar dokumen
+        self.external_qa_chain = None
         self._setup_qa_chain()
-        self._setup_external_qa_chain()  # BARU: Setup chain external
+        self._setup_external_qa_chain()
     
     def _setup_qa_chain(self):
         """Setup the conversational retrieval chain"""
@@ -59,18 +60,18 @@ class ActuarialChatService:
             raise
     
     def _setup_external_qa_chain(self):
-        """Setup chain untuk pertanyaan di luar dokumen dengan akses ke history"""
+        """Setup chain untuk pertanyaan aktuaria tanpa dokumen"""
         try:
+            # Prompt template untuk pertanyaan eksternal
             external_prompt = PromptTemplate(
                 input_variables=["question", "chat_history"],
                 template=self._get_external_prompt_template()
             )
             
-            # Buat LLMChain yang bisa akses chat history
+            # Buat LLMChain sederhana untuk menangani pertanyaan eksternal
             self.external_qa_chain = LLMChain(
                 llm=self.llm,
                 prompt=external_prompt,
-                memory=self.memory,  # PENTING: Gunakan memory yang sama
                 verbose=True
             )
             
@@ -79,7 +80,7 @@ class ActuarialChatService:
         except Exception as e:
             logger.error(f"Error setting up external QA chain: {str(e)}")
             raise
-    
+
     def _get_custom_prompt_template(self) -> str:
         """Get custom prompt template for actuarial chatbot"""
         return """Anda adalah asisten AI ahli aktuaria yang membantu tim internal perusahaan asuransi Indonesia. 
@@ -114,7 +115,7 @@ class ActuarialChatService:
         """Get prompt template untuk pertanyaan di luar dokumen"""
         return """Anda adalah asisten AI ahli aktuaria yang membantu tim internal perusahaan asuransi Indonesia.
 
-            SITUASI: Tidak ada dokumen relevan yang ditemukan untuk pertanyaan ini dalam knowledge base.
+            SITUASI: Tidak ada dokumen relevan yang ditemukan untuk pertanyaan ini dalam knowledge base, atau ini adalah pertanyaan diskusi aktuaria umum.
 
             RIWAYAT PERCAKAPAN:
             {chat_history}
@@ -138,34 +139,90 @@ class ActuarialChatService:
             JAWABAN:"""
     
     def _handle_external_question(self, question: str, session_id: str) -> Dict[str, Any]:
-        """Fungsi khusus untuk menangani pertanyaan di luar dokumen"""
+        """Fungsi khusus untuk menangani pertanyaan aktuaria tanpa dokumen dengan memory/history"""
         try:
-            logger.info(f"Handling external question for session {session_id}")
+            logger.info(f"Handling external actuarial question for session {session_id}")
             
-            # Gunakan external_qa_chain yang sudah punya akses ke memory/history
-            result = self.external_qa_chain.run(question=question)
+            # Format chat history untuk prompt
+            chat_history_formatted = self._format_chat_history()
+            
+            # Gunakan external_qa_chain
+            result = self.external_qa_chain.run(
+                question=question,
+                chat_history=chat_history_formatted
+            )
+            
+            # Simpan ke memory untuk konsistensi
+            self.memory.save_context(
+                {"input": question},
+                {"output": result}
+            )
             
             return {
                 'answer': result,
                 'sources': [],
-                'confidence': 0.4,  # Medium-low confidence
+                'confidence': 0.7,
                 'session_id': session_id,
                 'relevant_chunks': 0,
-                'mode': 'external_knowledge',
-                'note': 'Jawaban berdasarkan pengetahuan umum aktuaria dengan mempertimbangkan konteks percakapan sebelumnya.'
+                'mode': 'actuarial_chat',
+                'note': 'Jawaban berdasarkan pengetahuan aktuaria umum dengan mempertimbangkan konteks percakapan.'
             }
-        
             
         except Exception as e:
             logger.error(f"Error handling external question: {str(e)}")
+            logger.error(traceback.format_exc())
             return {
-                'answer': 'Maaf, saya tidak dapat memproses pertanyaan Anda saat ini. Silakan coba lagi atau unggah dokumen yang relevan.',
+                'answer': 'Maaf, saya tidak dapat memproses pertanyaan aktuaria Anda saat ini. Silakan coba lagi.',
                 'sources': [],
                 'confidence': 0.0,
                 'session_id': session_id,
                 'error': str(e),
                 'mode': 'error'
             }
+
+    def _format_chat_history(self) -> str:
+        """Format chat history untuk prompt"""
+        try:
+            messages = self.memory.chat_memory.messages
+            if not messages:
+                return "Tidak ada riwayat percakapan sebelumnya."
+            
+            formatted_history = []
+            for i in range(len(messages)):
+                if messages[i].type == "human":
+                    formatted_history.append(f"Pengguna: {messages[i].content}")
+                elif messages[i].type == "ai":
+                    formatted_history.append(f"Asisten: {messages[i].content}")
+            
+            return "\n".join(formatted_history[-6:])  # Ambil 6 pesan terakhir
+            
+        except Exception as e:
+            logger.error(f"Error formatting chat history: {str(e)}")
+            return "Tidak dapat memformat riwayat percakapan."
+
+    def _ensure_session_memory(self, session_id: str):
+        """Pastikan memory untuk session sudah diinisialisasi"""
+        try:
+            # Jika menggunakan session-based memory management
+            if not hasattr(self, 'session_memories'):
+                self.session_memories = {}
+            
+            if session_id not in self.session_memories:
+                # Buat memory baru untuk session ini jika belum ada
+                from langchain.memory import ConversationBufferWindowMemory
+                self.session_memories[session_id] = ConversationBufferWindowMemory(
+                    k=getattr(config, 'MEMORY_WINDOW_SIZE', 10),
+                    return_messages=True
+                )
+                logger.info(f"Created new memory for session {session_id}")
+            
+            # Set memory aktif ke session ini
+            self.memory = self.session_memories[session_id]
+            
+        except Exception as e:
+            logger.error(f"Error ensuring session memory: {str(e)}")
+            # Fallback ke memory default jika gagal
+            pass
     
     def _is_conversational_question(self, question: str) -> bool:
         """Deteksi apakah pertanyaan bersifat conversational/follow-up"""
@@ -177,23 +234,22 @@ class ActuarialChatService:
         
         question_lower = question.lower()
         return any(indicator in question_lower for indicator in conversational_indicators)
-    
 
-    def ask_question(self, question: str, session_id: str) -> Dict[str, Any]:
-        
+    def ask_project(self, question: str, session_id: str) -> Dict[str, Any]:
         """Process a question and return answer with sources"""
         try:
+            # Ensure session memory is set up
+            self._ensure_session_memory(session_id)
+            
             # Get relevant documents first for context
             relevant_docs = self.vector_store_manager.similarity_search_with_score(
                 question, 
-                session_id,  # BARU: Kirim session_id
+                session_id,
                 k=config.TOP_K_RESULTS
             )
             
             if not relevant_docs:
                 logger.info(f"No relevant documents found for session {session_id}")
-                
-                # BARU: Gunakan fungsi khusus untuk pertanyaan eksternal
                 return self._handle_external_question(question, session_id)
             else:
                 # Process question through QA chain
@@ -202,9 +258,8 @@ class ActuarialChatService:
                     "chat_history": self.memory.chat_memory.messages
                 })
                 
-                #logger.info(f"sblm ekstrak Chat endpoint - question: {question}, session_id: {session_id}")
                 # Extract source information
-                sources = self._extract_source_info(result.get('source_documents'), session_id)
+                sources = self._extract_source_info(result.get('source_documents', []), session_id)
                 
                 # Calculate confidence based on similarity scores
                 confidence = self._calculate_confidence(relevant_docs)
@@ -214,21 +269,47 @@ class ActuarialChatService:
                     'sources': sources,
                     'confidence': confidence,
                     'session_id': session_id,
-                    'relevant_chunks': len(relevant_docs)
+                    'relevant_chunks': len(relevant_docs),
+                    'mode': 'document_based'
                 }
                 logger.info(f"Question processed successfully. Confidence: {confidence}")
                 return response
             
         except Exception as e:
             logger.error(f"Error processing question: {str(e)}")
+            logger.error(traceback.format_exc())
             return {
                 'answer': 'Maaf, terjadi kesalahan saat memproses pertanyaan Anda.',
                 'sources': [],
                 'confidence': 0.0,
                 'session_id': session_id,
-                'error': str(e)
+                'error': str(e),
+                'mode': 'error'
             }
     
+    def ask_question(self, question: str, session_id: str) -> Dict[str, Any]:
+        """Process a question and return answer with sources (untuk diskusi aktuaria umum)"""
+        try:
+            logger.info(f"Processing general actuarial question for session {session_id}")
+            
+            # Ensure session memory is set up
+            self._ensure_session_memory(session_id)
+            
+            # Langsung gunakan external handling untuk diskusi aktuaria
+            return self._handle_external_question(question, session_id)
+            
+        except Exception as e:
+            logger.error(f"Error processing question: {str(e)}")
+            logger.error(traceback.format_exc())
+            return {
+                'answer': 'Maaf, terjadi kesalahan saat memproses pertanyaan Anda.',
+                'sources': [],
+                'confidence': 0.0,
+                'session_id': session_id,
+                'error': str(e),
+                'mode': 'error'
+            }
+        
     def _extract_source_info(self, source_documents: List[Document], session_id: str) -> List[Dict[str, Any]]:
         """Extract source information from documents with session_id filtering"""
         sources = []
@@ -243,7 +324,6 @@ class ActuarialChatService:
         else:
             filtered_docs = source_documents
         
-        logger.info(session_id)
         logger.info(f"Source documents: {len(source_documents)} -> After session filter: {len(filtered_docs)}")
         
         for doc in filtered_docs:
@@ -257,7 +337,7 @@ class ActuarialChatService:
                     'chunk_id': metadata.get('chunk_id', 0),
                     'headers': {k: v for k, v in metadata.items() if k.startswith('Header')},
                     'preview': doc.page_content[:200] + "..." if len(doc.page_content) > 200 else doc.page_content,
-                    'session_id': metadata.get('session_id')  # Tambahkan untuk debug
+                    'session_id': metadata.get('session_id')
                 })
                 seen_sources.add(source_key)
         
@@ -278,8 +358,12 @@ class ActuarialChatService:
     def clear_memory(self, session_id: str = None) -> bool:
         """Clear conversation memory"""
         try:
-            self.memory.clear()
-            logger.info(f"Memory cleared for session: {session_id}")
+            if session_id and hasattr(self, 'session_memories') and session_id in self.session_memories:
+                self.session_memories[session_id].clear()
+                logger.info(f"Memory cleared for session: {session_id}")
+            else:
+                self.memory.clear()
+                logger.info("Default memory cleared")
             return True
         except Exception as e:
             logger.error(f"Error clearing memory: {str(e)}")
@@ -288,7 +372,12 @@ class ActuarialChatService:
     def get_conversation_history(self, session_id: str = None) -> List[Dict[str, str]]:
         """Get conversation history"""
         try:
-            messages = self.memory.chat_memory.messages
+            # Ambil memory yang sesuai dengan session
+            if session_id and hasattr(self, 'session_memories') and session_id in self.session_memories:
+                messages = self.session_memories[session_id].chat_memory.messages
+            else:
+                messages = self.memory.chat_memory.messages
+                
             history = []
             
             for i in range(0, len(messages), 2):

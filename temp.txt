@@ -1,0 +1,38 @@
+"""
+# Buat resource group
+az group create \
+  --name aktuaribot-rg \
+  --location southeastasia
+
+
+az appservice plan create \
+  --name aktuaribot-plan \
+  --resource-group aktuaribot-rg \
+  --sku B1 \
+  --is-linux
+
+az webapp create \
+  --resource-group aktuaribot-rg \
+  --plan aktuaribot-plan \
+  --name aktuaribot-new \
+  --runtime "PYTHON|3.9" \
+  --deployment-local-git
+
+'https://yusrilfalih@aktuaribot-new.scm.azurewebsites.net/aktuaribot-new.git'
+az webapp deployment source config \
+  --name aktuaribot-new \
+  --resource-group aktuaribot-rg \
+  --repo-url https://github.com/yusrilf/chatbot-aktuaria-new \
+  --branch main \
+  --manual-integration
+
+  problem?
+
+  az webapp deployment github-actions add \
+  --name aktuaribot-new \
+  --resource-group aktuaribot-rg \
+  --repo yusrilf/chatbot-aktuaria-new \
+  --branch main \
+  --login-with-github
+
+""""
