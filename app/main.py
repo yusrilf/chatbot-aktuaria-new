@@ -21,6 +21,7 @@ logger = logging.getLogger(__name__)
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app)  # Allow all origins (for dev)
 app.config.from_object(config)
 
 # Initialize services
@@ -241,17 +242,20 @@ def ask_question():
 
 @app.route('/conversation/history', methods=['GET'])
 def get_conversation_history():
-    """Get conversation history"""
+    """Get conversation history for a session with optional sampling"""
     try:
         session_id = request.args.get('session_id', 'default')
-        history = chat_service.get_conversation_history(session_id)
-        
+        limit = int(request.args.get('limit', 10))
+        random_sample = request.args.get('random', 'false').lower() == 'true'
+
+        history = chat_service.get_conversation_history(session_id=session_id, random_sample=random_sample, limit=limit)
+
         return jsonify(create_response(
             success=True,
             message="Conversation history retrieved",
             data={'history': history, 'session_id': session_id}
         ))
-        
+
     except Exception as e:
         logger.error(f"Error getting conversation history: {str(e)}")
         return jsonify(create_response(
@@ -259,6 +263,7 @@ def get_conversation_history():
             message="Error getting conversation history",
             data={'error': str(e)}
         )), 500
+
 
 @app.route('/conversation/clear', methods=['POST'])
 def clear_conversation():

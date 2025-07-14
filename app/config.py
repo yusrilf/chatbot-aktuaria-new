@@ -8,7 +8,8 @@ class Config:
     OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
     os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_API_KEY')
 
-    OPENAI_MODEL = 'gpt-4o'
+    COHERE_API_KEY = os.getenv('COHERE_API_KEY')
+    OPENAI_MODEL = 'gpt-4.1'
     EMBEDDING_MODEL = 'text-embedding-3-large'
     
     # ChromaDB Settings
@@ -20,12 +21,12 @@ class Config:
     FLASK_DEBUG = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
     
     # Document Processing
-    CHUNK_SIZE = 1000
-    CHUNK_OVERLAP = 200
+    CHUNK_SIZE = 200
+    CHUNK_OVERLAP = 50
     
     # Chat Settings
     MAX_CONTEXT_LENGTH = 4000
-    SIMILARITY_THRESHOLD = 0.7
+    SIMILARITY_THRESHOLD = 0.75
     TOP_K_RESULTS = 5
     
     # Logging

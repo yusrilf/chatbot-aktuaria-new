@@ -6,6 +6,7 @@ from langchain.schema import Document
 from typing import List, Optional
 import logging
 import os
+import cohere
 
 from app.config import config
 
@@ -17,6 +18,7 @@ class VectorStoreManager:
             model=config.EMBEDDING_MODEL,
             openai_api_key=config.OPENAI_API_KEY
         )
+        self.cohere_client = cohere.Client(config.COHERE_API_KEY)
         self.chroma_client = None
         self.vectorstore = None
         self._initialize_vectorstore()
@@ -80,6 +82,43 @@ class VectorStoreManager:
         except Exception as e:
             logger.error(f"Error searching documents: {str(e)}")
             return []
+        
+    def rerank_documents(self, query: str, docs_with_scores: List[tuple], top_n: int = None) -> List[tuple]:
+        """Rerank documents using Cohere based on relevance to query"""
+        try:
+            if not docs_with_scores:
+                logger.info("No documents to rerank")
+                return []
+
+            documents = [doc.page_content for doc, _ in docs_with_scores]
+            
+            # Call Cohere rerank API
+            response = self.cohere_client.rerank(
+                query=query,
+                documents=documents,
+                top_n=top_n or len(documents)
+            )
+
+            # Sort according to Cohere scores
+            reranked = sorted(
+                zip(response.results, docs_with_scores),
+                key=lambda x: x[0].relevance_score,
+                reverse=True
+            )
+
+            # Convert back to (Document, score) with reranked relevance
+            result = [
+                (docs_with_scores[item.index][0], item.relevance_score)
+                for item, _ in reranked
+            ]
+
+            logger.info(f"Reranked {len(result)} documents using Cohere")
+            return result
+
+        except Exception as e:
+            logger.error(f"Error in reranking with Cohere: {str(e)}")
+            return []
+
     
     def similarity_search_with_score(self, query: str, session_id: str, k: int = None) -> List[tuple]:
         """Search for similar documents with similarity scores"""

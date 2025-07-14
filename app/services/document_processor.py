@@ -25,7 +25,7 @@ class DocumentProcessor:
             chunk_size=config.CHUNK_SIZE,
             chunk_overlap=config.CHUNK_OVERLAP,
             length_function=len,
-            separators=["\n\n", "\n", " ", ""]
+            separators=["\n\n", "\n", ". ", "! ", "? ", " "]
         )
     
     def process_markdown_file(self, file_path: str, session_id: str) -> List[Document]:
@@ -38,6 +38,8 @@ class DocumentProcessor:
             filename = os.path.basename(file_path)
             doc_type = self._extract_document_type(filename, content)
             
+            #cleaning page
+            content = self.clean_markdown_content(content)
             # Split by markdown headers first
             header_splits = self.markdown_splitter.split_text(content)
             
@@ -79,6 +81,33 @@ class DocumentProcessor:
             logger.error(f"Error processing file {file_path}: {str(e)}")
             return []
     
+    def clean_markdown_content(self, content: str) -> str:
+        """Remove unwanted headers, footers, and repeated lines from markdown"""
+        # Hapus footer/header umum
+        lines = content.splitlines()
+        clean_lines = []
+
+        for line in lines:
+            line = line.strip()
+
+            # Skip empty or noise lines
+            if not line or re.match(r'^(Page \d+ of \d+|Halaman \d+|^#+\s*$|^\*+$|^[-=]{3,})$', line):
+                continue
+
+            # Hapus URL tidak penting
+            if re.match(r'https?://', line):
+                continue
+
+            clean_lines.append(line)
+
+        cleaned_content = '\n'.join(clean_lines)
+
+        # Optional: Hilangkan header/footer yang diulang (misal: "Asuransi ABC 2024")
+        cleaned_content = re.sub(r"(Asuransi\s+\w+\s+\d{4})", "", cleaned_content)
+
+        return cleaned_content.strip()
+
+
     def process_multiple_files(self, file_paths: List[str]) -> List[Document]:
         """Process multiple markdown files"""
         all_documents = []

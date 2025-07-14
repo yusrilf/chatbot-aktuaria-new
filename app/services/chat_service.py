@@ -82,34 +82,42 @@ class ActuarialChatService:
             raise
 
     def _get_custom_prompt_template(self) -> str:
-        """Get custom prompt template for actuarial chatbot"""
-        return """Anda adalah asisten AI ahli aktuaria yang membantu tim internal perusahaan asuransi Indonesia. 
-            Gunakan konteks dokumen yang disediakan untuk menjawab pertanyaan dengan akurat dan profesional.
+        """Get optimized and controlled prompt template for the actuarial chatbot"""
+        return """Anda adalah asisten AI ahli aktuaria untuk tim internal perusahaan asuransi Indonesia.
+    Jawab pertanyaan HANYA berdasarkan dokumen yang diberikan. Jika jawaban tidak ditemukan dalam dokumen, katakan dengan jujur: **"Maaf, saya tidak menemukan informasi tersebut dalam dokumen yang tersedia."** Jangan mengarang atau menebak informasi.
 
-            KONTEKS DOKUMEN:
-            {context}
+    ==================
+    📄 KONTEKS DOKUMEN:
+    {context}
 
-            RIWAYAT PERCAKAPAN:
-            {chat_history}
+    💬 RIWAYAT PERCAKAPAN:
+    {chat_history}
+    ==================
 
-            PANDUAN JAWABAN:
-            1. Berikan jawaban yang akurat berdasarkan dokumen yang tersedia
-            2. Jika pertanyaan memerlukan perhitungan, berikan langkah-langkah yang jelas
-            3. Sertakan referensi ke dokumen sumber jika relevan
-            4. Jika informasi tidak tersedia dalam dokumen, katakan dengan jelas
-            5. Untuk pertanyaan numerik, berikan contoh perhitungan jika memungkinkan
-            6. Gunakan bahasa Indonesia yang profesional dan mudah dipahami
-            7. Jika ada tabel atau formula, tampilkan dengan format yang rapi
+    📌 PETUNJUK:
+    1. Jawaban harus berbasis pada dokumen di atas.
+    2. Jika diperlukan, berikan langkah perhitungan aktuaria secara sistematis.
+    3. Referensikan bagian atau halaman dari dokumen jika relevan.
+    4. Jangan gunakan pengetahuan di luar dokumen.
+    5. Gunakan Bahasa Indonesia formal, profesional, dan mudah dipahami.
+    6. Tampilkan tabel, formula, atau struktur numerik dengan rapi jika relevan.
+    7. Jika data tidak ditemukan, nyatakan dengan eksplisit tanpa membuat asumsi.
 
-            FORMAT JAWABAN:
-            - Jawaban utama dengan penjelasan yang jelas
-            - Langkah perhitungan (jika ada)
-            - Referensi dokumen sumber
-            - Catatan atau disclaimer jika diperlukan
+    ==================
+    ❓PERTANYAAN PENGGUNA:
+    {question}
 
-            PERTANYAAN: {question}
+    ==================
+    ✅ FORMAT JAWABAN:
+    - **Jawaban utama:** Penjelasan langsung dan ringkas
+    - **Langkah perhitungan:** (jika ada)
+    - **Referensi dokumen:** Nama dokumen, halaman, atau metadata
+    - **Catatan tambahan / disclaimer:** (jika diperlukan)
 
-            JAWABAN:"""
+    ==================
+    🧾 JAWABAN:
+    """
+
     
     def _get_external_prompt_template(self) -> str:
         """Get prompt template untuk pertanyaan di luar dokumen"""
@@ -238,43 +246,73 @@ class ActuarialChatService:
     def ask_project(self, question: str, session_id: str) -> Dict[str, Any]:
         """Process a question and return answer with sources"""
         try:
-            # Ensure session memory is set up
             self._ensure_session_memory(session_id)
-            
-            # Get relevant documents first for context
+
+            # Step 1: Ambil dokumen relevan secara manual
             relevant_docs = self.vector_store_manager.similarity_search_with_score(
                 question, 
                 session_id,
-                k=config.TOP_K_RESULTS
+                k=config.TOP_K_RESULTS * 2  # ambil lebih banyak untuk bahan rerank
             )
-            
+
             if not relevant_docs:
                 logger.info(f"No relevant documents found for session {session_id}")
                 return self._handle_external_question(question, session_id)
-            else:
-                # Process question through QA chain
-                result = self.qa_chain({
-                    "question": question,
-                    "chat_history": self.memory.chat_memory.messages
-                })
-                
-                # Extract source information
-                sources = self._extract_source_info(result.get('source_documents', []), session_id)
-                
-                # Calculate confidence based on similarity scores
-                confidence = self._calculate_confidence(relevant_docs)
-                
-                response = {
-                    'answer': result['answer'],
-                    'sources': sources,
-                    'confidence': confidence,
-                    'session_id': session_id,
-                    'relevant_chunks': len(relevant_docs),
-                    'mode': 'document_based'
-                }
-                logger.info(f"Question processed successfully. Confidence: {confidence}")
-                return response
+
+            # ✅ Step 1.5: Rerank dengan Cohere
+            relevant_docs = self.vector_store_manager.rerank_documents(
+                query=question,
+                docs_with_scores=relevant_docs,
+                top_n=config.TOP_K_RESULTS  # ambil N teratas hasil rerank
+            )
+            logger.info(f"Documents after rerank: {[ (doc.metadata.get('filename'), score) for doc, score in relevant_docs ]}")
+
+            # Step 2: Format dokumen menjadi konteks string
+            context = "\n\n".join([doc.page_content for doc, score in relevant_docs])
             
+            # Step 3: Siapkan prompt dan LLMChain manual
+            prompt = PromptTemplate(
+                input_variables=["context", "question", "chat_history"],
+                template=self._get_custom_prompt_template()
+            )
+
+            formatted_history = self._format_chat_history()
+
+            llm_chain = LLMChain(
+                llm=self.llm,
+                prompt=prompt,
+                verbose=False
+            )
+
+            # Step 4: Kirim ke LLM
+            answer = llm_chain.run({
+                "context": context,
+                "question": question,
+                "chat_history": formatted_history
+            })
+
+            # Step 5: Simpan hasil ke memory
+            self.memory.save_context(
+                {"input": question},
+                {"output": answer}
+            )
+
+            # Step 6: Ekstrak sumber
+            docs_only = [doc for doc, score in relevant_docs]
+            sources = self._extract_source_info(docs_only, session_id)
+
+            # Step 7: Confidence
+            confidence = self._calculate_confidence(relevant_docs)
+
+            return {
+                'answer': answer,
+                'sources': sources,
+                'confidence': confidence,
+                'session_id': session_id,
+                'relevant_chunks': len(relevant_docs),
+                'mode': 'document_based'
+            }
+
         except Exception as e:
             logger.error(f"Error processing question: {str(e)}")
             logger.error(traceback.format_exc())
@@ -286,6 +324,7 @@ class ActuarialChatService:
                 'error': str(e),
                 'mode': 'error'
             }
+
     
     def ask_question(self, question: str, session_id: str) -> Dict[str, Any]:
         """Process a question and return answer with sources (untuk diskusi aktuaria umum)"""
@@ -369,30 +408,45 @@ class ActuarialChatService:
             logger.error(f"Error clearing memory: {str(e)}")
             return False
     
-    def get_conversation_history(self, session_id: str = None) -> List[Dict[str, str]]:
-        """Get conversation history"""
+    def get_conversation_history(self, session_id: str = None, random_sample: bool = False, limit: int = 10) -> List[Dict[str, str]]:
+        """Get conversation history filtered by session_id, with optional random sampling or limiting"""
         try:
-            # Ambil memory yang sesuai dengan session
+            messages = []
+
+            # Ambil memory berdasarkan session_id yang valid
             if session_id and hasattr(self, 'session_memories') and session_id in self.session_memories:
                 messages = self.session_memories[session_id].chat_memory.messages
             else:
-                messages = self.memory.chat_memory.messages
-                
+                logger.warning(f"No memory found for session_id: {session_id}")
+                return []
+
+            # Gabungkan pasangan Q-A
             history = []
-            
-            for i in range(0, len(messages), 2):
-                if i + 1 < len(messages):
+            for i in range(0, len(messages) - 1, 2):
+                user_msg = messages[i]
+                ai_msg = messages[i + 1]
+                
+                if user_msg.type == "human" and ai_msg.type == "ai":
                     history.append({
-                        'question': messages[i].content,
-                        'answer': messages[i + 1].content,
-                        'timestamp': getattr(messages[i], 'timestamp', None)
+                        'question': user_msg.content,
+                        'answer': ai_msg.content,
+                        'timestamp': getattr(user_msg, 'timestamp', None)
                     })
-            
+
+            # Apply random sampling jika diminta
+            if random_sample and len(history) > limit:
+                import random
+                history = random.sample(history, k=limit)
+            else:
+                # Ambil yang terbaru saja
+                history = history[-limit:]
+
             return history
-            
+
         except Exception as e:
             logger.error(f"Error getting conversation history: {str(e)}")
             return []
+
     
     def get_system_stats(self) -> Dict[str, Any]:
         """Get system statistics"""

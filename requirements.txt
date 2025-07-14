@@ -135,3 +135,4 @@ zipp==3.22.0
 zstandard==0.23.0
 streamlit
 requests
+cohere
