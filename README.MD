@@ -112,8 +112,7 @@ curl -X POST http://localhost:5001/askproject \
   -H "Content-Type: application/json" \
   -d '{
     "question": "Apa hasil analisis sensitivitas proyek A?",
-    "session_id": "test_session",
-    "project_id": "proyek_A"
+    "session_id": "test_session"
   }'
 ```
 
