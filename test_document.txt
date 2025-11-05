@@ -1,0 +1,11 @@
+Test Document for Input-Docs Route
+
+This is a test document to verify that the input-docs route is working correctly after the fixes.
+
+Content:
+- This document contains sample text for testing
+- It should be processed successfully by the document processor
+- The vector store should accept this document without errors
+
+Testing Date: 2025-10-06
+Purpose: Verify input-docs route functionality
