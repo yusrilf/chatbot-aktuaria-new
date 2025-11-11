@@ -1,0 +1,1232 @@
+{
+    "laporan_valuasi_aktuaria": {
+        "judul": "LAPORAN VALUASI AKTUARIA",
+        "judul_en": "ACTUARIAL VALUATION REPORT",
+        "nomor_laporan": "0053/PSAK219/N/VIII/25",
+        "nama_perusahaan": "PT. ABC",
+        "periode_valuasi": "30 JUNI 2025",
+        "deskripsi": {
+            "perhitungan_kewajiban_imbalan_kerja_karyawan": "PERHITUNGAN KEWAJIBAN IMBALAN KERJA KARYAWAN",
+            "perhitungan_kewajiban_imbalan_kerja_karyawan_en": "CALCULATION OF POST-EMPLOYEE BENEFITS",
+            "kewajiban_potensial": "KEWAJIBAN POTENSIAL UNTUK PEMBAYARAN IMBALAN PASCA KERJA BERDASARKAN Undang-Undang Ketenagakerjaan No. 6 Tahun 2023 DAN PERATURAN PEMERINTAH NO. 35 TAHUN 2023 SESUAI PSAK 219",
+            "kewajiban_potensial_en": "POTENTIAL LIABILITY TO SEVERANCE PAYMENT BASED ON Labor Law No. 6 Year 2023 AND GOVERNMENT REGULATION NUMBER 35 OF 2023 UNDER PSAK 219"
+        },
+        "informasi_umum": {
+            "nama_perusahaan": {
+                "label": "Nama Perusahaan (Name of Company)",
+                "value": "PT. ABC"
+            },
+            "alamat_perusahaan": {
+                "label": "Alamat Perusahaan (Company Address)",
+                "value": "Siak Room, 1st Floor, Hotel Aryaduta, Jl. Pangeran Diponegoro No. 34, Pekanbaru, Riau 28116, Indonesia"
+            },
+            "periode_valuasi": {
+                "label": "Periode Valuasi (Valuation Period)",
+                "value": "30 Juni 2025"
+            },
+            "perusahaan_konsultan": {
+                "label": "Perusahaan Konsultan (Consultant)",
+                "value": "KANTOR KONSULTAN AKTUARIA NIRMALA"
+            },
+            "npwp_konsultan": {
+                "label": "N P W P Konsultan (TIN Consultant)",
+                "value": "1091 0312 1099 4406"
+            },
+            "alamat_konsultan": {
+                "label": "Alamat Konsultan (Consultant Address)",
+                "value": "Menara Caraka, Lantai 6 Unit 627 Jl. Mega Kuningan Barat Blok E. 4.7 No. 1, Kav.Kuningan, Daerah Timur, Kec. Setiabudi, Kota Adm. Jakarta Selatan, Provinsi DKI Jakarta, Kode Pos: 12950"
+            },
+            "izin_pakai_usaha": {
+                "label": "Izin Pakai Usaha Dari Kementerian Keuangan Republik Indonesia",
+                "value": {
+                    "kep_men_ku": "Kepmen Ku No 782/KM.1/2024",
+                    "nomor_izin": "Nomor Izin: 4.24.0021"
+                }
+            },
+            "nama_aktuaris": {
+                "label": "Nama Aktuaris (Name of Actuary)",
+                "value": "Jayanthi Nirmala, FSAI"
+            },
+            "pai_registered": {
+                "label": "No. PAI Registered (PAI Registered Number)",
+                "value": "2024106552"
+            },
+            "nomor_aktuaris_publik": {
+                "label": "Nomor Aktuaris Publik (Actuary Public No.)",
+                "value": "Act-1.24.00243"
+            }
+        },
+        "referensi_dokumen": {
+            "nomor_izin": "4.24.0021",
+            "kepmen_ku": "Kepmen Keu RI No 782/KM.1/2024"
+        },
+        "daftar_isi": {
+            "title": "DAFTAR ISI",
+            "title_en": "TABLE OF CONTENTS",
+            "sections": [{
+                    "number": "I",
+                    "title_id": "Pendahuluan",
+                    "title_en": "Introduction"
+                },
+                {
+                    "number": "II",
+                    "title_id": "Ringkasan Data dan Data Keuangan",
+                    "title_en": "Summary of Employees and Financial Data"
+                },
+                {
+                    "number": "III",
+                    "title_id": "Tabel Pesangon dan Uang Penghargaan Masa Kerja",
+                    "title_en": "Table of Severance Pay and Service Pay"
+                },
+                {
+                    "number": "IV",
+                    "title_id": "Ringkasan Manfaat",
+                    "title_en": "Summary Benefit"
+                },
+                {
+                    "number": "V",
+                    "title_id": "Metodologi",
+                    "title_en": "Methodology"
+                },
+                {
+                    "number": "VI",
+                    "title_id": "Asumsi Keuangan",
+                    "title_en": "Financial Assumptions"
+                },
+                {
+                    "number": "VII",
+                    "title_id": "Asumsi Demografi",
+                    "title_en": "Demographic Assumptions"
+                },
+                {
+                    "number": "VIII",
+                    "title_id": "Asumsi Aktuaria",
+                    "title_en": "Actuarial Assumption"
+                },
+                {
+                    "number": "IX",
+                    "title_id": "Ringkasan Hasil Perhitungan Aktuaria",
+                    "title_en": "Summary of Actuarial Calculation Result"
+                },
+                {
+                    "number": "X",
+                    "title_id": "Penutup",
+                    "title_en": "Closing"
+                }
+            ],
+            "appendices": [{
+                    "title_id": "Dasar Penetapan Tingkat Diskonto",
+                    "title_en": "Basic Discount Rate Determination"
+                },
+                {
+                    "title_id": "Rekap Hasil Perhitungan",
+                    "title_en": "Recapitulation of Calculation Result"
+                },
+                {
+                    "title_id": "Surat Pernyataan Kebenaran Data dan Persetujuan Asumsi",
+                    "title_en": "Statement of Data Correctness and Approval of Assumptions"
+                }
+            ]
+        },
+        "isi_laporan": {
+            "i_pendahuluan": {
+                "title": "I. PENDAHULUAN",
+                "title_en": "I. INTRODUCTION",
+                "content_id": "Laporan ini disusun untuk memberikan informasi kepada PT. ABC untuk mengetahui Beban/Penghasilan Bersih yang diakui di dalam Laporan Laba/Rugi dan Liabilitas/(Aset) Bersih yang diakui dalam Neraca.\n\nPerhitungan Aktuaria mengenai Program Imbalan Pasca Kerja ini dilaksanakan sesuai Undang-Undang Ketenagakerjaan No. 6 Tahun 2023 dan Peraturan Pemerintah No. 35 Tahun 2023 sesuai dengan PSAK219 dan pengungkapan imbalan kerja periode berjalan berdasarkan International Finance Reporting Interpretation Committee (IFRIC) menggunakan data peserta per 30 Juni 2025.",
+                "content_en": "This report is prepared to provide information to PT. ABC to find out the Expenses/Income recognized in the Income Statement and Liabilities/(Assets) recognized in the Balance Sheet.\n\nActuarial calculations regarding Post Employment Benefit Program are based on Labor Law No. 6 Year 2023 and Government Regulation No. 35 year 2023 in accordance with PSAK 219 and Attributing Benefit to Periode of Service based on International Finance Reporting Interpretation Comitte (IFRIC) using participant data as of 30 June 2025."
+            },
+            "ii_ringkasan_data": {
+                "title": "II. RINGKASAN DATA KARYAWAN DAN DATA KEUANGAN",
+                "title_en": "II. SUMMARY OF EMPLOYEE DATA AND FINANCIAL DATA",
+                "ii_1_data_karyawan": {
+                    "title": "II.1 Data Karyawan",
+                    "title_en": "II.1 Employee Data",
+                    "table": {
+                        "headers": {
+                            "deskripsi": "DESKRIPSI",
+                            "description": "DESCRIPTION",
+                            "permanent": "Permanent",
+                            "contract": "Contract"
+                        },
+                        "rows": [{
+                                "deskripsi": "Jumlah Karyawan",
+                                "description": "Number of Employee",
+                                "permanent": "12",
+                                "contract": "1"
+                            },
+                            {
+                                "deskripsi": "Rata-rata Usia (Tahun)",
+                                "description": "Average Age (Years Old)",
+                                "permanent": "33.04",
+                                "contract": "21.01"
+                            },
+                            {
+                                "deskripsi": "Rata-rata Masa Kerja Lalu (Tahun)",
+                                "description": "Average Past Working Service (Years)",
+                                "permanent": "4.08",
+                                "contract": "0.81"
+                            },
+                            {
+                                "deskripsi": "Rata-rata Sisa Masa Kerja (Tahun)",
+                                "description": "Average Future Remaining Working Service (Years)",
+                                "permanent": "4.08",
+                                "contract": "0.81"
+                            },
+                            {
+                                "deskripsi": "Jumlah Gaji Bulanan (Rp)",
+                                "description": "Total Monthly Salary (IDR)",
+                                "permanent": "77,487,319",
+                                "contract": "3,691,216"
+                            },
+                            {
+                                "deskripsi": "Rata-rata Jumlah Gaji Bulanan (Rp)",
+                                "description": "Average Total Monthly Salary (IDR)",
+                                "permanent": "6,457,277",
+                                "contract": "3,691,216"
+                            }
+                        ]
+                    }
+                },
+                "ii_2_data_keuangan": {
+                    "title": "II.2 Data Keuangan",
+                    "title_en": "II.2 Financial Data",
+                    "content_id": "Pembayaran Imbalan Kerja Aktual per 30 Juni 2025 adalah Rp. -",
+                    "content_en": "Actual Benefit Payment as of 30 June 2025 is IDR -"
+                }
+            },
+            "iii_tabel_pesangon": {
+                "title": "III. TABEL UANG PESANGON DAN UANG PENGHARGAAN MASA KERJA",
+                "title_en": "III. TABLE OF SEVERANCE PAY AND SERVICE PAY",
+                "subtitle_id": "Berdasarkan Undang-Undang Ketenagakerjaan No. 6 Tahun 2023",
+                "subtitle_en": "Based on Labor Law No. 6 Year 2023",
+                "table": {
+                    "headers": {
+                        "masa_kerja": "Masa Kerja (MK)",
+                        "uang_pesangon": "Uang Pesangon/Severance Pay",
+                        "uang_penghargaan": "Uang Penghargaan Masa Kerja/Service Pay",
+                        "year_of_service": "Year of Service (YoS)"
+                    },
+                    "rows": [{
+                            "masa_kerja": "MK < 1 tahun",
+                            "uang_pesangon": "1",
+                            "uang_penghargaan": "0",
+                            "year_of_service": "YoS < 1 year"
+                        },
+                        {
+                            "masa_kerja": "1 tahun ≤ MK < 2 tahun",
+                            "uang_pesangon": "2",
+                            "uang_penghargaan": "0",
+                            "year_of_service": "1 year ≤ YoS < 2"
+                        },
+                        {
+                            "masa_kerja": "2 tahun ≤ MK < 3 tahun",
+                            "uang_pesangon": "3",
+                            "uang_penghargaan": "0",
+                            "year_of_service": "2 years ≤ YoS < 3"
+                        },
+                        {
+                            "masa_kerja": "3 tahun ≤ MK < 4 tahun",
+                            "uang_pesangon": "4",
+                            "uang_penghargaan": "2",
+                            "year_of_service": "3 years ≤ YoS < 4"
+                        },
+                        {
+                            "masa_kerja": "4 tahun ≤ MK < 5 tahun",
+                            "uang_pesangon": "5",
+                            "uang_penghargaan": "2",
+                            "year_of_service": "4 years ≤ YoS < 5"
+                        },
+                        {
+                            "masa_kerja": "5 tahun ≤ MK < 6 tahun",
+                            "uang_pesangon": "6",
+                            "uang_penghargaan": "2",
+                            "year_of_service": "5 years ≤ YoS < 6"
+                        },
+                        {
+                            "masa_kerja": "6 tahun ≤ MK < 7 tahun",
+                            "uang_pesangon": "7",
+                            "uang_penghargaan": "3",
+                            "year_of_service": "6 years ≤ YoS < 7"
+                        },
+                        {
+                            "masa_kerja": "7 tahun ≤ MK < 8 tahun",
+                            "uang_pesangon": "8",
+                            "uang_penghargaan": "3",
+                            "year_of_service": "7 years ≤ YoS < 8"
+                        },
+                        {
+                            "masa_kerja": "8 tahun ≤ MK < 9 tahun",
+                            "uang_pesangon": "9",
+                            "uang_penghargaan": "3",
+                            "year_of_service": "8 years ≤ YoS < 9"
+                        },
+                        {
+                            "masa_kerja": "9 tahun ≤ MK < 12 tahun",
+                            "uang_pesangon": "9",
+                            "uang_penghargaan": "4",
+                            "year_of_service": "9 years ≤ YoS < 12"
+                        },
+                        {
+                            "masa_kerja": "12 tahun ≤ MK < 15",
+                            "uang_pesangon": "9",
+                            "uang_penghargaan": "5",
+                            "year_of_service": "12 years ≤ YoS < 15"
+                        },
+                        {
+                            "masa_kerja": "15 tahun ≤ MK < 18",
+                            "uang_pesangon": "9",
+                            "uang_penghargaan": "6",
+                            "year_of_service": "15 years ≤ YoS < 18"
+                        },
+                        {
+                            "masa_kerja": "18 tahun ≤ MK < 21",
+                            "uang_pesangon": "9",
+                            "uang_penghargaan": "7",
+                            "year_of_service": "18 years ≤ YoS < 21"
+                        },
+                        {
+                            "masa_kerja": "21 tahun ≤ MK < 24",
+                            "uang_pesangon": "9",
+                            "uang_penghargaan": "8",
+                            "year_of_service": "21 years ≤ YoS < 24"
+                        },
+                        {
+                            "masa_kerja": "MK ≥ 24 tahun",
+                            "uang_pesangon": "9",
+                            "uang_penghargaan": "10",
+                            "year_of_service": "YoS ≥ 24 years"
+                        }
+                    ]
+                }
+            },
+            "iv_ringkasan_manfaat": {
+                "title": "IV. RINGKASAN MANFAAT",
+                "title_en": "IV. SUMMARY BENEFIT",
+                "manfaat_sesuai_tabel": {
+                    "title_id": "Manfaat Sesuai Undang-Undang Ketenagakerjaan No. 6 Tahun 2023",
+                    "title_en": "Benefit Based on Labor Law No. 6 Year 2023",
+                    "categories": [{
+                            "name": "Pensiun Normal",
+                            "value": "(1,75 x Severance Pay + 1 x Service Pay) + Compensation Pay}",
+                            "name_en": "Normal Retirement",
+                            "value_en": "(1,75 x Severance Pay + 1 x Service Pay) + Compensation Pay}"
+                        },
+                        {
+                            "name": "Pekerja Meninggal Dunia",
+                            "value": "(2 x Severance Pay + 1 x Service Pay) + Compensation Pay",
+                            "name_en": "Death Benefit",
+                            "value_en": "(2 x Severance Pay + 1 x Service Pay) + Compensation Pay"
+                        },
+                        {
+                            "name": "Sakit Berkepanjangan",
+                            "value": "(2 x Severance Pay + 1 x Service Pay) + Compensation Pay",
+                            "name_en": "Disability / Illness",
+                            "value_en": "(2 x Severance Pay + 1 x Service Pay) + Compensation Pay"
+                        },
+                        {
+                            "name": "Pekerja Mengundurkan Diri",
+                            "value": "Compensation Pay",
+                            "name_en": "Voluntary Resign",
+                            "value_en": "Compensation Pay"
+                        },
+                        {
+                            "name": "Contract Employee Benefit ",
+                            "value": "Manfaat Pegawai Kontrak",
+                            "name_en": "Contract Employee Benefit ",
+                            "value_en": "Manfaat Pegawai Kontrak"
+                        }
+                    ]
+                },
+                "uang_pisah": {
+                    "title_id": "Uang Pisah",
+                    "title_en": "Separation Pay",
+                    "description_id": "Uang Pisah berdasarkan Peraturan Perusahaan. Uang Pisah yang diterima meliputi:",
+                    "description_en": "Separation Payment under Company Regulations. Separation Payment consists:",
+                    "table": {
+                        "headers": {
+                            "service_yos": "Service (YoS)** Masa Kerja",
+                            "separation_pay": "Separation Pay/ Uang Pisah*"
+                        },
+                        "rows": [{
+                            "service_yos": "3 - 5 tahun",
+                            "separation_pay": "2 Bulan Upah"
+                        }]
+                    }
+                }
+            },
+            "v_program_pensiun": {
+                "title": "V. Program Pensiun",
+                "title_en": "V. Pension Program",
+                "uang_duka": {
+                    "title_id": "Uang Duka",
+                    "title_en": "Sad Donation",
+                    "description_id": "Uang duka sebesar Rp. Rp. 3,000,000.00 berdasarkan Peraturan Perusahaan",
+                    "description_en": "Sad donation is on Rp.Rp. 3,000,000.00 under Company Regulations."
+                },
+                "manfaat_jangka_panjang": {
+                    "title_id": "Manfaat Jangka Panjang Lainnya",
+                    "title_en": "Other Long Term Benefit",
+                    "table": {
+                        "headers": {
+                            "service_yos": "Service (YoS)** Masa Kerja",
+                            "appreciation_pay": "Appreciation Pay/ Uang Apresiasi**"
+                        },
+                        "rows": [{
+                            "service_yos": "-",
+                            "appreciation_pay": "-"
+                        }]
+                    }
+                },
+                "program_pensiun_description": {
+                    "content_id": "DPLK dengan Program Pensiun Iuran Pasti merupakan program pensiun yang menjanjikan manfaat pensiun peserta berdasarkan besaran iuran yang ditentukan diawal dan peserta mendapatkan manfaat pensiun didasarkan pada juran dan pengembangan yang dipercayai di DPLK serta dihububkan terhadap retenang atas nama masing-masing karyawan. Dalam hal ini, sumber iuran peserta dapat berasal dari Perusahaan Pemberi Kerja atau hasil sharing antara seluruh karyawan dan perusahaan.",
+                    "content_en": "DPLK with the Defined Contribution Pension Program is a pension program that promises to provide retirement benefits based on the amount of contributions determined at the beginning and participants receive pension benefits based on the contributions and development obtained at the DPLK and recorded in an account in the name of each employee. In this case, the source of participant contributions can come from the Employer Company or the results of sharing between employee and company deposits.",
+                    "perusahaan_note": "Perusahaan tidak memiliki Program Dana Pensiun Lembaga Keuangan yang berjalan saat ini.",
+                    "company_note": "The company does not have an active Financial Institution Pension Fund (DPLK) program at this time."
+                }
+            },
+            "vi_metodologi": {
+                "title": "VI. METODOLOGI",
+                "title_en": "VI. METHODOLOGY",
+                "content_id": "Tujuan PSAK 219 adalah untuk penjelasan akuntansi untuk mengetahui manfaat untuk karyawan. Di dalam PSAK 219, perusahaan diisyaratkan untuk mengetahui Liabilitas pada saat karyawan telah memiliki masa kerja dan memberikan manfaat yang akan dibayarkan untuk masa kerja yang akan datang dan Beban pada saat perusahaan mendapatkan manfaat ekonomis atas apa yang telah diberikan karyawan kepada Perusahaan.",
+                "content_en": "The purpose of PSAK 219 is to explain accounting and to find out benefits for employees. In PSAK 219, companies are required to know the Liabilities when the employees have worked and provide benefits to be paid for future service and Expenses when the company gets economic benefits for what the employees have provided to the Company.",
+                "components": {
+                    "title_id": "Dalam PSAK 219, Komponen Beban/Pendapatan, terdiri dari :",
+                    "title_en": "In PSAK 219, the components of Expenses/ Income, consist of:",
+                    "items_id": [
+                        "a. Biaya Jasa (Biaya Jasa Kini + Biaya Jasa Lalu),",
+                        "b. Bunga Netto atas Liabilitas/(Aset),",
+                        "c. (Keuntungan) Kerugian Aktuaria atas Penyelesaian"
+                    ],
+                    "items_en": [
+                        "a. Service Cost (Current Service Cost + Past Service Cost),",
+                        "b. Net Interest on Liabilities/(Assets),",
+                        "c. (Gains) Losses Actuarial on Settlement"
+                    ]
+                },
+                "balance_sheet_info": {
+                    "content_id": "Pada Laporan Neraca, jumlah Liabilitas/ (Aset) yang diakui adalah akumulasi dari Liabilitas/(Aset) Awal Periode ditambah Beban/Pendapatan dikurangi Pembayaran Imbalan Kerja Aktual dikurangi Kontribusi Perusahaan (jika ada) dikurangi atau ditambah Pendapatan Komprehensif Lain.",
+                    "content_en": "In the Balance Sheet, the amount of Liabilities/(Assets) recognized is the accumulation of Liabilities/(Assets) at the Beginning of the Period plus Expenses/Income minus Actual Benefit Payment minus Company Contributions (if any) minus or plus Other Comprehensive Income."
+                }
+            },
+            "vii_asumsi_aktuaria": {
+                "title": "VII. ASUMSI AKTUARIA",
+                "title_en": "VII. ACTUARIAL ASSUMPTIONS",
+                "vii_1_tingkat_diskonto": {
+                    "title": "VII.1 Tingkat Diskonto",
+                    "title_en": "VII.1 Discount Rate",
+                    "content_id": "Tingkat Diskonto ditentukan dengan mengacu pada tingkat bunga obligasi pemerintah pada tanggal laporan yang aktif per tanggal neraca dengan tenor berdasarkan pada sisa masa kerja rata-rata datang di perusahaan. Tingkat Diskonto yang digunakan dalam perhitungan ini sebesar 5.71% per tahun.",
+                    "content_en": "The Discount Rate is determined by government obligation interest rate active on a specific report date with a tenor based on the remaining future service at the company. The Discount Rate used in this calculation is 5.71% per annum."
+                },
+                "vii_2_tingkat_kenaikan_gaji": {
+                    "title": "VII.2 Tingkat Kenaikan Gaji",
+                    "title_en": "VII.2 Salary Increase Rate",
+                    "content_id": "Persentase proyeksi tingkat kenaikan gaji di masa yang akan datang ditentukan oleh faktor-faktor inflasi, senioritas, promosi dan faktor relevan lainnya. Setelah itu, diambil rata-rata kenaikan gaji per tahun berdasarkan Gaji Pokok. Adapun peningkatan tersebut, asumsi tingkat kenaikan gaji yang digunakan perusahaan adalah 6.00% per tahun",
+                    "content_en": "Estimated of salary increase rate is determined by factors of inflation, seniority, promotion and other relevant factors. After that, the average salary increase is taken based on the basic salary. With these considerations, assumed of salary future increase rate used by the company is 6.00% per annum."
+                },
+                "vii_3_tabel_mortalita": {
+                    "title": "VII.3 Tabel Mortalita",
+                    "title_en": "VII.3 Mortality Table",
+                    "content_id": "Penentuan dari penggunaan Tabel Mortalita biasanya menggunakan data dari pengalaman yang sudah terjadi di perusahaan, sehingga untuk memelihara konsistensi digunakan tabel yang sama dengan periode sebelumnya. Tabel yang digunakan dalam perhitungan ini adalah TMI 2019.",
+                    "content_en": "Determination of the use of the Mortality Rate, usually uses data from the experience that has occurred in the company, so that to maintain consistency the same table is used as in the previous period. The table used in this calculation is TMI 2019."
+                },
+                "vii_4_tingkat_cacat": {
+                    "title": "VII.4 Tingkat Cacat",
+                    "title_en": "VII.4 Disability Rate",
+                    "content_id": "Tingkat Cacat yang digunakan adalah 5.00% dari TMI 2019.",
+                    "content_en": "Disability Rate used is 5.00% from TMI 2019."
+                },
+                "vii_5_tingkat_pengunduran_diri": {
+                    "title": "VII.5 Tingkat Pengunduran Diri",
+                    "title_en": "VII.5 Resignation Rate",
+                    "content_id": "Tingkat Pengunduran Diri sesuai lampiran 3",
+                    "content_en": "Resignation rate according to appendix 3"
+                },
+                "vii_6_usia_pensiun_normal": {
+                    "title": "VII.6 Usia Pensiun Normal",
+                    "title_en": "VII.6 Normal Retirement Age",
+                    "content_id": "Usia Pensiun Normal adalah - tahun.",
+                    "content_en": "Normal Retirement Age is - years old."
+                },
+                "vii_7_metode_perhitungan": {
+                    "title": "VII.7 Metode Perhitungan Aktuaria",
+                    "title_en": "VII.7 Actuarial Calculation Method",
+                    "content_id": "Metode perhitungan aktuaria yang digunakan untuk menentukan Nilai Kini Kewajiban Imbalan Pasti dan Biaya Jasa Kini adalah \"Projected Unit Credit\" sebagaimana tercantum dalam ketentuan PSAK-219 dimana pembayaran dari Nilai Sekarang manfaat program dialokasikan berdasarkan satuan masa kerja pada periode-periode tertentu.",
+                    "content_en": "Actuarial calculation method used to determine the Present Value Benefit Obligations and Current Service Costs is \"Projected Unit Credit\" as stated in the provisions of PSAK-219 where the financing of the Present Value of program benefits is allocated based on the unit of service period for the periods certain."
+                }
+            },
+            "viii_ringkasan_hasil": {
+                "title": "VIII. RINGKASAN HASIL PERHITUNGAN AKTUARIA",
+                "title_en": "VIII. SUMMARY OF ACTUARIAL CALCULATION RESULT",
+                "viii_1_tetap_kontrak": {
+                    "title": "VIII.1 TETAP DAN KONTRAK",
+                    "title_en": "VIII.1 PERMANENT AND CONTRACT",
+                    "pengakuan_kewajiban_neraca": {
+                        "title": "Pengakuan Kewajiban/(Kekayaan) dalam Neraca",
+                        "title_en": "Recognition of Liability/(Assets) in the Balance Sheet",
+                        "table": {
+                            "headers": {
+                                "kewajiban_kekayaan": "Kewajiban dan Kekayaan",
+                                "30 Juni 2025": "30 Juni 2025",
+                                "30 Juni 2024": "30 Juni 2024",
+                                "asset_liabilities": "Asset and Liabilities"
+                            },
+                            "rows": [{
+                                    "kewajiban_kekayaan": "Nilai Kini Kewajiban",
+                                    "30 Juni 2025": "3,652,115",
+                                    "30 Juni 2024": "-",
+                                    "asset_liabilities": "Present Value of Obligation"
+                                },
+                                {
+                                    "kewajiban_kekayaan": "Nilai Wajar Aktiva Program",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "asset_liabilities": "Fair Value of Plan Assets"
+                                },
+                                {
+                                    "kewajiban_kekayaan": "Posisi Pendanaan",
+                                    "30 Juni 2025": "3,652,115",
+                                    "30 Juni 2024": "-",
+                                    "asset_liabilities": "Funded Status"
+                                },
+                                {
+                                    "kewajiban_kekayaan": "Biaya Jasa Lalu yang belum diakui - Non Vested",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "asset_liabilities": "Unrecognized Past Service Cost - Non Vested"
+                                },
+                                {
+                                    "kewajiban_kekayaan": "Keuntungan/(Kerugian) Aktuarial yang Belum Diakui",
+                                    "30 Juni 2025": "3,652,115",
+                                    "30 Juni 2024": "-",
+                                    "asset_liabilities": "Unrecognized Actuarial Gains/(Losses)"
+                                },
+                                {
+                                    "kewajiban_kekayaan": "Kewajiban/(Kekayaan) yang Diakui dalam Neraca",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "asset_liabilities": "Liability/(Assets) Recognized in The Balance Sheet"
+                                }
+                            ]
+                        }
+                    },
+                    "pengakuan_beban_pendapatan": {
+                        "title": "Pengakuan Beban / Pendapatan",
+                        "title_en": "Recognition of Expense / (Income)",
+                        "table": {
+                            "headers": {
+                                "cost_components": "Cost Components",
+                                "30 Juni 2025": "30 Juni 2025",
+                                "30 Juni 2024": "30 Juni 2024",
+                                "komponen_biaya": "Komponen Biaya"
+                            },
+                            "rows": [{
+                                    "cost_components": "Biaya Jasa Kini",
+                                    "30 Juni 2025": "3,652,115",
+                                    "30 Juni 2024": "-",
+                                    "komponen_biaya": "Current Service Cost"
+                                },
+                                {
+                                    "cost_components": "Biaya Bunga",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "komponen_biaya": "Interest Cost"
+                                },
+                                {
+                                    "cost_components": "Harapan dari Hasil Investasi",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "komponen_biaya": "Expected Return on Plan Assets"
+                                },
+                                {
+                                    "cost_components": "Pencairan Sebagai dari Biaya Jasa Lalu",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "komponen_biaya": "Immediate Recognition of Past Service Cost"
+                                },
+                                {
+                                    "cost_components": "Dampak Curtailment / Penyelesaian Beban/(Pendapatan) yang Diakui dalam Laporan Laba/Rugi",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "komponen_biaya": "Curtailment Effect / Settlement Expense/(Income) should be Recognized in The Income Statement"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "reconciliation_tables": {
+                    "rekonsiliasi_kewajiban": {
+                        "title": "Rekonsiliasi Kewajiban/(Kekayaan) yang di catat dalam Neraca",
+                        "title_en": "Reconciliation of liability/(Asset) that is recorded in Balance Sheet",
+                        "table": {
+                            "headers": {
+                                "reconciliation_items": "Reconciliation of liability and Asset",
+                                "30 Juni 2025": "30 Juni 2025",
+                                "30 Juni 2024": "30 Juni 2024",
+                                "reconciliation_description": "Rekonsiliasi Kewajiban dan Kekayaan"
+                            },
+                            "rows": [{
+                                    "reconciliation_items": "Kewajiban/(Kekayaan) pada Awal Valuasi",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "reconciliation_description": "Liability/(Assets) at Beginning of Period"
+                                },
+                                {
+                                    "reconciliation_items": "Beban/(Pendapatan)",
+                                    "30 Juni 2025": "3,652,115",
+                                    "30 Juni 2024": "-",
+                                    "reconciliation_description": "Expense/(Income)"
+                                },
+                                {
+                                    "reconciliation_items": "Realisasi Pembayaran Manfaat",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "reconciliation_description": "Benefit Payment - Actual"
+                                },
+                                {
+                                    "reconciliation_items": "Iuran Perusahaan",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "reconciliation_description": "Company Contribution"
+                                },
+                                {
+                                    "reconciliation_items": "Pendapatan Komprehensif Lainnya",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "reconciliation_description": "Other Comprehensive Income"
+                                },
+                                {
+                                    "reconciliation_items": "Kewajiban / (Kekayaan) pada Akhir Valuasi",
+                                    "30 Juni 2025": "3,652,115",
+                                    "30 Juni 2024": "-",
+                                    "reconciliation_description": "Liability/(Assets) at End of Period"
+                                }
+                            ]
+                        }
+                    },
+                    "pendapatan_komprehensif": {
+                        "title": "Pendapatan Komprehensif Lainnya",
+                        "title_en": "Other Comprehensive Income",
+                        "table": {
+                            "headers": {
+                                "items": "",
+                                "30 Juni 2025": "30 Juni 2025",
+                                "30 Juni 2024": "30 Juni 2024",
+                                "description": ""
+                            },
+                            "rows": [{
+                                    "items": "Pendapatan Komprehensif lainnya awal valuasi",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "description": "Other Comprehensive Income at BoP"
+                                },
+                                {
+                                    "items": "(Keuntungan)/Kerugian aktuaria – kewajiban",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "description": "Actuarial (Gain)/Loss at on Period - Obligation"
+                                },
+                                {
+                                    "items": "(Keuntungan)/Kerugian aktuaria – Aktiva Program",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "description": "Actuarial (Gain)/Loss at on Period - Plan Assets"
+                                },
+                                {
+                                    "items": "Total (Keuntungan)/Kerugian aktuaria",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "description": "Total Actuarial (Gain)/Loss at on Period"
+                                },
+                                {
+                                    "items": "Pendapatan Komprehensif lainnya akhir periode",
+                                    "30 Juni 2025": "-",
+                                    "30 Juni 2024": "-",
+                                    "description": "Other Comprehensive Income at EoP"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "penutup": {
+            "title": "IX. ASUMSI AKTUARIA",
+            "title_en": "IX. ACTUARIAL ASSUMPTIONS",
+            "statement": {
+                "content_id": "Demikian kami sampaikan, semoga laporan ini bermanfaat bagi PT. ABC. Apabila terdapat hal-hal yang masih belum jelas, kami menyediakan waktu yang cukup untuk menjelaskannya",
+                "content_en": "Thus we convey, hopefully this report is useful for PT. ABC. If there are things still not clear, we provide sufficient time to explain them"
+            },
+            "location_date": "Jakarta, 31 Desember 2024",
+            "company_info": {
+                "name": "KANTOR KONSULTAN AKTUARIA NIRMALA",
+                "license_number": "Nomor Izin : 4.24.0021",
+                "regulation": "Kepmen Keu RI No 782/KM.1/2024"
+            },
+            "actuary_info": {
+                "name": "Jayanthi Nirmala, FSAI",
+                "pai_number": "No. Reg PAI : 2024106552",
+                "public_actuary": "Public Actuary No. Act-1.24.00243"
+            }
+        },
+        "lampiran": {
+            "lampiran_1_terminologi_teknis": {
+                "title": "Lampiran 1 - Terminologi Teknis",
+                "title_en": "Appendix 1 - Technical Terminologies",
+                "definitions": [{
+                        "number": 1,
+                        "term_id": "Biaya jasa kini adalah kesatuan nilai kini kewajiban imbalan kerja jasa pelaku dalam periode berjalan",
+                        "term_en": "Current Service Cost is present value of all benefit which will accrue in the year following the valuation date, by reference to service in that year"
+                    },
+                    {
+                        "number": 2,
+                        "term_id": "Imbalan Kerja Yang Telah Imbalan Hak adalah imbalan atas jasa yang telah bertagaan pada alur atau tekstur berada pada masa depan",
+                        "term_en": "Vested Employee Benefit is employees' benefits that are not determined by his/her employment status in the future."
+                    },
+                    {
+                        "number": 3,
+                        "term_id": "Nilai Kini Kewajiban Imbalan Pasti adalah nilai kini pembayaran masa depan yang disalurkan untuk memberangsangkan kewajiban atas jasa statum tersebut berdasar dan spesifik sesuatu lalu. Nilai kini dalam perhitungan tersebut tidak dikurangi dengan aktiva program",
+                        "term_en": "The Present Value of a defined benefit obligations is the actuarial present value as of a date of all benefit attributed by benefit formula to employee service rendered prior to that date and is measured using assumptions as to future compensations levels."
+                    },
+                    {
+                        "number": 4,
+                        "term_id": "Biaya Bunga adalah kenaikan nilai kini kewajiban imbalan pasti yang timbul selama suatu periode karena periode tersebut semakin dekat dengan penyelesaian",
+                        "term_en": "Interest Cost is the notional interest applied on the Present Value of Obligation using the discount rate as determined at start of the period. Taking into account of any material changes in the obligation."
+                    },
+                    {
+                        "number": 5,
+                        "term_id": "Nilai Wajar adalah suatu jumlah yang digunakan untuk mengukur aktiva yang dapat dipertukarkan atau hutang yang diselesaikan melalui suatu transaksi yang wajar",
+                        "term_en": "Fair Value is an amount used to measure an asset that can be net-off with liability arising from employment benefit through arm's length transaction."
+                    },
+                    {
+                        "number": 6,
+                        "term_id": "Hasil Aktiva Program adalah bunga, dividen dan pendapatan lain yang berasal dari aktiva program; termasuk keuntungan atau kerugian aktiva program yang telah atau belum direalisasi, dikurangi biaya administrasi dan pajak terhadap program tersebut",
+                        "term_en": "The Return on Plan Assets is interest, dividend and other income arising from Fair Value, including losses or gain from the asset that has or not yet realized, less administration cost and tax outstanding."
+                    },
+                    {
+                        "number": 7,
+                        "term_id": "Keuntungan Dan Kerugian Aktuaria diakui sebagai sebagai pendapatan komprehensif lainnya",
+                        "term_en": "Actuarial Gains and Losses recognized as well as other comprehensive income"
+                    },
+                    {
+                        "number": 8,
+                        "term_id": "Biaya Jasa Lalu adalah kenaikan nilai kini kewajiban imbalan pasti atas jasa selaku pada periode-periode lalu yang berdasarkan terhadap periode beratan akhut perencanaan awal atau pemberian terhadap imbalan pascakerja atau imbalan kerja jangka panjang lainnya. Biaya jasa lalu dapat bernilai positif (ketika imbalan diperkenalkan atau ditingkatkan) atau negatif (ketika imbalan yang ada dikurangi)",
+                        "term_en": "Past Service Cost is the increase in the present value of the defined benefit obligation for service workers in the past periods, the impact on the current period as to the initial pension or changes to post-employment benefits or other long-term employee benefits. Past service cost may be positive (when benefits are held or improved) or negative (when existing benefits are reduced)."
+                    }
+                ]
+            },
+            "lampiran_2_yield_curve": {
+                "title": "Lampiran 2 - INDONESIA GOVERNMENT YIELD CURVE",
+                "title_en": "Appendix 2 - INDONESIA GOVERNMENT YIELD CURVE",
+                "table": {
+                    "headers": {
+                        "yield": "Yield",
+                        "spot_rate": "Spot Rate 30 Juni 2025"
+                    },
+                    "rows": [{
+                            "yield": "0,5",
+                            "spot_rate": "5.716457%"
+                        },
+                        {
+                            "yield": "1",
+                            "spot_rate": "5.884256%"
+                        },
+                        {
+                            "yield": "2",
+                            "spot_rate": "6.031256%"
+                        },
+                        {
+                            "yield": "3",
+                            "spot_rate": "6.16077%"
+                        },
+                        {
+                            "yield": "4",
+                            "spot_rate": "6.279839%"
+                        },
+                        {
+                            "yield": "5",
+                            "spot_rate": "6.391284%"
+                        },
+                        {
+                            "yield": "6",
+                            "spot_rate": "6.495755%"
+                        },
+                        {
+                            "yield": "7",
+                            "spot_rate": "6.59297%"
+                        },
+                        {
+                            "yield": "8",
+                            "spot_rate": "6.682396%"
+                        },
+                        {
+                            "yield": "9",
+                            "spot_rate": "6.763577%"
+                        },
+                        {
+                            "yield": "10",
+                            "spot_rate": "6.836276%"
+                        },
+                        {
+                            "yield": "11",
+                            "spot_rate": "6.900506%"
+                        },
+                        {
+                            "yield": "12",
+                            "spot_rate": "6.956508%"
+                        },
+                        {
+                            "yield": "13",
+                            "spot_rate": "7.004704%"
+                        },
+                        {
+                            "yield": "14",
+                            "spot_rate": "7.04565%"
+                        },
+                        {
+                            "yield": "15",
+                            "spot_rate": "7.07998%"
+                        },
+                        {
+                            "yield": "16",
+                            "spot_rate": "7.108371%"
+                        },
+                        {
+                            "yield": "17",
+                            "spot_rate": "7.131506%"
+                        },
+                        {
+                            "yield": "18",
+                            "spot_rate": "7.150047%"
+                        },
+                        {
+                            "yield": "19",
+                            "spot_rate": "7.164622%"
+                        },
+                        {
+                            "yield": "20",
+                            "spot_rate": "7.175809%"
+                        },
+                        {
+                            "yield": "21",
+                            "spot_rate": "7.184132%"
+                        },
+                        {
+                            "yield": "22",
+                            "spot_rate": "7.190059%"
+                        },
+                        {
+                            "yield": "23",
+                            "spot_rate": "7.194%"
+                        },
+                        {
+                            "yield": "24",
+                            "spot_rate": "7.196312%"
+                        },
+                        {
+                            "yield": "25",
+                            "spot_rate": "7.197302%"
+                        },
+                        {
+                            "yield": "26",
+                            "spot_rate": "7.197231%"
+                        },
+                        {
+                            "yield": "27",
+                            "spot_rate": "7.19632%"
+                        },
+                        {
+                            "yield": "28",
+                            "spot_rate": "7.194752%"
+                        },
+                        {
+                            "yield": "29",
+                            "spot_rate": "7.192681%"
+                        },
+                        {
+                            "yield": "30",
+                            "spot_rate": "7.190232%"
+                        }
+                    ]
+                }
+            },
+            "lampiran_4_sensitivitas": {
+                "title": "Lampiran 4 - SENSITIVITAS",
+                "title_en": "Appendix 4 - SENSITIVITY ANALYSIS",
+                "analisa_sensitivitas_diskonto": {
+                    "title": "Analisa Sensitivitas tingkat Diskonto terhadap Nilai Kini Kewajiban Imbalan Pasti",
+                    "title_en": "Sensitivity Analysis to Discount Rate on Present Value of Defined Benefit Obligation",
+                    "table": {
+                        "headers": {
+                            "uraian": "URAIAN",
+                            "permanent": "Permanent",
+                            "contract": "Contract",
+                            "olteb": "OLTEB",
+                            "explanation": "EXPLANATION"
+                        },
+                        "rows": [{
+                                "uraian": "5.71%",
+                                "permanent": "200,066,178",
+                                "contract": "3,652,115",
+                                "olteb": "20,778,317",
+                                "explanation": "5.71%"
+                            },
+                            {
+                                "uraian": "Naik 1%",
+                                "permanent": "175,010,862",
+                                "contract": "3,645,527",
+                                "olteb": "20,231,082",
+                                "explanation": "increase 1%"
+                            },
+                            {
+                                "uraian": "Turun 1%",
+                                "permanent": "230,506,089",
+                                "contract": "3,658,779",
+                                "olteb": "21,370,819",
+                                "explanation": "decrease 1%"
+                            }
+                        ]
+                    }
+                },
+                "analisa_sensitivitas_jasa_kini": {
+                    "title": "Analisa Sensitivitas tingkat Diskonto terhadap Nilai Jasa Kini",
+                    "title_en": "Sensitivity Analysis to Discount Rate on Current Service Cost",
+                    "table": {
+                        "headers": {
+                            "uraian": "URAIAN",
+                            "permanent": "Permanent",
+                            "contract": "Contract",
+                            "olteb": "OLTEB",
+                            "explanation": "EXPLANATION"
+                        },
+                        "rows": [{
+                                "uraian": "5.71%",
+                                "permanent": "56,527,722",
+                                "contract": "3,652,115",
+                                "olteb": "3,831,601",
+                                "explanation": "5.71%"
+                            },
+                            {
+                                "uraian": "Naik 1%",
+                                "permanent": "48,504,771",
+                                "contract": "3,645,527",
+                                "olteb": "3,703,085",
+                                "explanation": "increase 1%"
+                            },
+                            {
+                                "uraian": "Turun 1%",
+                                "permanent": "66,494,509",
+                                "contract": "3,658,779",
+                                "olteb": "3,971,099",
+                                "explanation": "decrease 1%"
+                            }
+                        ]
+                    }
+                },
+                "analisa_sensitivitas_kenaikan_gaji": {
+                    "title": "Analisa Sensitivitas tingkat kenaikan gaji terhadap Nilai Kini Kewajiban Imbalan Pasti",
+                    "title_en": "Sensitivity Analysis to Salary Increase on Present Value of Defined Benefit Obligation",
+                    "table": {
+                        "headers": {
+                            "uraian": "URAIAN",
+                            "permanent": "Permanent",
+                            "contract": "Contract",
+                            "olteb": "OLTEB",
+                            "explanation": "EXPLANATION"
+                        },
+                        "rows": [{
+                                "uraian": "6.00%",
+                                "permanent": "200,066,178",
+                                "contract": "3,652,115",
+                                "olteb": "20,778,317",
+                                "explanation": "6.00%"
+                            },
+                            {
+                                "uraian": "Naik 1%",
+                                "permanent": "230,305,097",
+                                "contract": "3,652,115",
+                                "olteb": "21,389,142",
+                                "explanation": "increase 1%"
+                            },
+                            {
+                                "uraian": "Turun 1%",
+                                "permanent": "174,214,480",
+                                "contract": "3,652,115",
+                                "olteb": "20,184,267",
+                                "explanation": "decrease 1%"
+                            }
+                        ]
+                    }
+                },
+                "analisa_sensitivitas_kenaikan_gaji_jasa_kini": {
+                    "title": "Analisa Sensitivitas tingkat kenaikan gaji terhadap Nilai Jasa Kini",
+                    "title_en": "Sensitivity Analysis to Salary Increase on Current Service Cost",
+                    "table": {
+                        "headers": {
+                            "uraian": "URAIAN",
+                            "permanent": "Permanent",
+                            "contract": "Contract",
+                            "olteb": "OLTEB",
+                            "explanation": "EXPLANATION"
+                        },
+                        "rows": [{
+                                "uraian": "6.00%",
+                                "permanent": "56,527,722",
+                                "contract": "3,652,115",
+                                "olteb": "3,831,601",
+                                "explanation": "6.00%"
+                            },
+                            {
+                                "uraian": "Naik 1%",
+                                "permanent": "66,355,701",
+                                "contract": "3,652,115",
+                                "olteb": "3,975,188",
+                                "explanation": "increase 1%"
+                            },
+                            {
+                                "uraian": "Turun 1%",
+                                "permanent": "48,235,948",
+                                "contract": "3,652,115",
+                                "olteb": "3,693,497",
+                                "explanation": "decrease 1%"
+                            }
+                        ]
+                    }
+                }
+            },
+            "analisa_imbalan_pasti_tidak_terdiskonto": {
+                "title": "Analisa Jatuh Tempo Atas Imbalan Pasti Tidak Terdiskonto",
+                "title_en": "Maturity Profile Of The Defined Benefit Obligations Undiscounted",
+                "table": {
+                    "headers": {
+                        "uraian": "URAIAN",
+                        "permanent": "Permanent",
+                        "contract": "Contract",
+                        "olteb": "OLTEB",
+                        "explanation": "EXPLANATION"
+                    },
+                    "rows": [{
+                            "uraian": "MBO ≤ 1 Tahun",
+                            "permanent": "-",
+                            "contract": "3,691,216",
+                            "olteb": "1,956,345",
+                            "explanation": "MBO ≤ 1 Years"
+                        },
+                        {
+                            "uraian": "1 ≤ MBO < 2 Tahun",
+                            "permanent": "-",
+                            "contract": "-",
+                            "olteb": "14,928,432",
+                            "explanation": "1 ≤ MBO < 2 Years"
+                        },
+                        {
+                            "uraian": "2 ≤ MBO < 3 Tahun",
+                            "permanent": "-",
+                            "contract": "-",
+                            "olteb": "2,208,012",
+                            "explanation": "2 ≤ MBO < 3 Years"
+                        },
+                        {
+                            "uraian": "3 ≤ MBO ≤ 5 Tahun",
+                            "permanent": "-",
+                            "contract": "-",
+                            "olteb": "18,404,658",
+                            "explanation": "3 ≤ MBO ≤ 5 Years"
+                        },
+                        {
+                            "uraian": "5 ≤ MBO < 10 Tahun",
+                            "permanent": "-",
+                            "contract": "-",
+                            "olteb": "12,453,001",
+                            "explanation": "5 ≤ MBO < 10 Years"
+                        },
+                        {
+                            "uraian": "MBO ≥ 10 Tahun",
+                            "permanent": "5,886,793,411",
+                            "contract": "-",
+                            "olteb": "-",
+                            "explanation": "MBO ≥ 10 Years"
+                        },
+                        {
+                            "uraian": "Total",
+                            "permanent": "5,886,793,411",
+                            "contract": "3,691,216",
+                            "olteb": "49,950,447",
+                            "explanation": "Total"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "tabel_perhitungan": {
+        "tabel_1_tetap_kontrak": {
+            "title": "TABEL 1 KARYAWAN TETAP DAN KONTRAK",
+            "title_en": "TABLE 1 PERMANENT AND CONTRACT EMPLOYEE",
+            "subtitle_id": "Perhitungan Aktuaria terhadap IPK untuk PT. ABC yang mekanisme perhitungan sesuai dengan PSAK No. 219",
+            "subtitle_en": "Post Employment Benefit's Actuarial Valuation for PT. ABC Calculated in accordance to PSAK 219 Approved Method",
+            "description_id": "Ikhtisar Data dan Asumsi Aktuaria Perhitungan per 30 Juni 2025",
+            "description_en": "Summary Data and Actuarial Assumption Valuation as of 30 June 2025",
+            "data_rows": [{
+                    "no": 1,
+                    "uraian": "Data dan Asumsi",
+                    "30 Juni 2025": "",
+                    "30 Juni 2024": "",
+                    "explanation": "Basic Data and Assumptions"
+                },
+                {
+                    "no": 2,
+                    "uraian": "Jumlah Karyawan (orang)",
+                    "30 Juni 2025": "1",
+                    "30 Juni 2024": "0",
+                    "explanation": "Number of Employee"
+                },
+                {
+                    "no": 3,
+                    "uraian": "Jumlah Gaji Sebulan",
+                    "30 Juni 2025": "3,691,216",
+                    "30 Juni 2024": "-",
+                    "explanation": "Monthly Wages"
+                },
+                {
+                    "no": 4,
+                    "uraian": "Rata-rata Gaji sebulan",
+                    "30 Juni 2025": "3,691,216",
+                    "30 Juni 2024": "-",
+                    "explanation": "Average Monthly Wages"
+                },
+                {
+                    "no": 5,
+                    "uraian": "Rata-rata Usia (Tahun)",
+                    "30 Juni 2025": "21.01",
+                    "30 Juni 2024": "-",
+                    "explanation": "Average Age (Years)"
+                },
+                {
+                    "no": 6,
+                    "uraian": "Rata-rata masa kerja (Tahun)",
+                    "30 Juni 2025": "0.81",
+                    "30 Juni 2024": "-",
+                    "explanation": "Average of Years of Service (Years)"
+                },
+                {
+                    "no": 7,
+                    "uraian": "Rata-rata Masa Kerja Yang Akan Datang (Tahun)",
+                    "30 Juni 2025": "0.19",
+                    "30 Juni 2024": "-",
+                    "explanation": "Average Future Service (years)"
+                },
+                {
+                    "no": 8,
+                    "uraian": "Rata-rata Sisa Masa kerja yang Diproyeksikan (Tahun)",
+                    "30 Juni 2025": "0.81",
+                    "30 Juni 2024": "-",
+                    "explanation": "Average Expected Remaining Working Lives (years)"
+                },
+                {
+                    "no": 9,
+                    "uraian": "Tingkat Diskonto Awal Tahun",
+                    "30 Juni 2025": "7.09%",
+                    "30 Juni 2024": "6.83%",
+                    "explanation": "Discount Rate Beginning Period"
+                },
+                {
+                    "no": 10,
+                    "uraian": "Tingkat Diskonto Akhir Tahun",
+                    "30 Juni 2025": "7.15%",
+                    "30 Juni 2024": "7.09%",
+                    "explanation": "Discount Rate Ending Period"
+                },
+                {
+                    "no": 11,
+                    "uraian": "Tingkat Harapan Investasi atas Aktiva Program (per tahun)",
+                    "30 Juni 2025": "-",
+                    "30 Juni 2024": "-",
+                    "explanation": "Expected Rate of Return on Plan Assets at BoP (years)"
+                },
+                {
+                    "no": 12,
+                    "uraian": "Tingkat Kenaikan Gaji (Per Tahun)",
+                    "30 Juni 2025": "5.00%",
+                    "30 Juni 2024": "5.00%",
+                    "explanation": "Future Salary Increases (per annum)"
+                },
+                {
+                    "no": 13,
+                    "uraian": "Biaya jasa kini",
+                    "30 Juni 2025": "3,652,115",
+                    "30 Juni 2024": "-",
+                    "explanation": "Current Service Cost"
+                },
+                {
+                    "no": 14,
+                    "uraian": "Imbalan yang dibayarkan",
+                    "30 Juni 2025": "-",
+                    "30 Juni 2024": "-",
+                    "explanation": "Total Benefit Paid in Year"
+                },
+                {
+                    "no": 15,
+                    "uraian": "Iuran yang dibayarkan",
+                    "30 Juni 2025": "-",
+                    "30 Juni 2024": "-",
+                    "explanation": "Company Contribution Paid in Year"
+                },
+                {
+                    "no": 16,
+                    "uraian": "Nilai kini kewajiban awal periode",
+                    "30 Juni 2025": "-",
+                    "30 Juni 2024": "-",
+                    "explanation": "Present Value of Obligation at BoP"
+                },
+                {
+                    "no": 17,
+                    "uraian": "Nilai kini kewajiban akhir periode",
+                    "30 Juni 2025": "3,652,115",
+                    "30 Juni 2024": "-",
+                    "explanation": "Present Value of Obligation at EoP"
+                },
+                {
+                    "no": 18,
+                    "uraian": "Biaya jasa lalu – non-vested",
+                    "30 Juni 2025": "-",
+                    "30 Juni 2024": "-",
+                    "explanation": "Past Service Cost - Non Vested at BoP"
+                },
+                {
+                    "no": 19,
+                    "uraian": "Biaya jasa lalu – vested",
+                    "30 Juni 2025": "-",
+                    "30 Juni 2024": "-",
+                    "explanation": "Past Service Cost - Vested at BoP"
+                },
+                {
+                    "no": 20,
+                    "uraian": "Nilai wajar aktiva program awal periode",
+                    "30 Juni 2025": "-",
+                    "30 Juni 2024": "-",
+                    "explanation": "Fair Value of Plan Asset Program Beginning of Period"
+                },
+                {
+                    "no": 21,
+                    "uraian": "Nilai wajar aktiva program akhir periode",
+                    "30 Juni 2025": "-",
+                    "30 Juni 2024": "-",
+                    "explanation": "Fair Value of Plan Asset Program End of Period"
+                }
+            ]
+        }
+    },
+    "metadata": {
+        "judul": "LAPORAN VALUASI AKTUARIA",
+        "judul_en": "ACTUARIAL VALUATION REPORT",
+        "nomor_laporan": "0053/PSAK219/N/VIII/25",
+        "nama_perusahaan": "PT. ABC",
+        "periode_valuasi": "30 JUNI 2025",
+        "deskripsi": {
+            "perhitungan_kewajiban_imbalan_kerja_karyawan": "PERHITUNGAN KEWAJIBAN IMBALAN KERJA KARYAWAN",
+            "perhitungan_kewajiban_imbalan_kerja_karyawan_en": "CALCULATION OF POST-EMPLOYEE BENEFITS",
+            "kewajiban_potensial": "KEWAJIBAN POTENSIAL UNTUK PEMBAYARAN IMBALAN PASCA KERJA BERDASARKAN Undang-Undang Ketenagakerjaan No. 6 Tahun 2023 DAN PERATURAN PEMERINTAH NO. 35 TAHUN 2023 SESUAI PSAK 219",
+            "kewajiban_potensial_en": "POTENTIAL LIABILITY TO SEVERANCE PAYMENT BASED ON Labor Law No. 6 Year 2023 AND GOVERNMENT REGULATION NUMBER 35 OF 2023 UNDER PSAK 219"
+        }
+    }
+}

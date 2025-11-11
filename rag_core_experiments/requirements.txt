@@ -1,0 +1,22 @@
+# Core RAG Experiments Requirements
+
+# LangChain and OpenAI
+langchain==0.3.20
+langchain-openai==0.3.2
+langchain-chroma==0.2.2
+langchain-core==0.3.43
+openai==1.59.8
+
+# Vector Store
+chromadb==0.6.4
+
+# Utilities
+python-dotenv==1.0.1
+pyyaml==6.0.2
+
+# Jupyter
+jupyter==1.1.1
+ipykernel==6.29.5
+
+# Optional: For enhanced functionality
+numpy==2.0.2
