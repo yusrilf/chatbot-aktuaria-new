@@ -23,6 +23,7 @@ from app.routes.health_routes import health_bp
 from app.routes.chat_routes import chat_bp
 from app.routes.document_routes import document_bp
 from app.routes.api_routes import api_bp
+from app.routes.langgraph_routes import langgraph_bp
 from app.api.document_endpoints import document_bp as api_document_bp
 
 logger = logging.getLogger(__name__)
@@ -80,7 +81,8 @@ def register_blueprints(app: Flask) -> None:
     app.register_blueprint(health_bp)
     app.register_blueprint(chat_bp)
     app.register_blueprint(document_bp)
-    
+    app.register_blueprint(langgraph_bp)
+
     # Register API blueprints
     app.register_blueprint(api_bp)
     app.register_blueprint(api_document_bp)
@@ -107,6 +109,7 @@ def register_root_route(app: Flask) -> None:
             "endpoints": {
                 "health": "/health",
                 "chat": "/ask, /askproject",
+                "langgraph": "/langgraph/ask, /langgraph/health, /langgraph/info",
                 "documents": "/input-docs, /documents/*",
                 "storage": "/api/storage/*",
                 "api_docs": "See README.MD for complete API documentation"
